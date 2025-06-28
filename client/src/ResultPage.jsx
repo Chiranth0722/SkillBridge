@@ -18,8 +18,9 @@ const ResultPage = () => {
   };
 
   const fetchRoadmap = async () => {
-    const OPENAI_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-    console.log("OPENAI KEY:", OPENAI_KEY); // Debug log
+    const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+
+    console.log("Using OpenAI API Key:", OPENAI_API_KEY); // Debug log
 
     try {
       const response = await axios.post(
@@ -32,14 +33,14 @@ const ResultPage = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${OPENAI_KEY}`,
+            Authorization: `Bearer ${OPENAI_API_KEY}`,
           },
         }
       );
       setRoadmap(response.data.choices[0].message.content);
     } catch (error) {
+      console.error("OpenAI API Error:", error?.response || error?.message || error);
       setRoadmap("Error generating roadmap. Please try again.");
-      console.error("OpenAI API Error:", error.response?.data || error.message);
     } finally {
       setLoading(false);
     }
@@ -56,4 +57,5 @@ const ResultPage = () => {
     </div>
   );
 };
+
 export default ResultPage;
