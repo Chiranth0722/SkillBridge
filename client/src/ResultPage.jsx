@@ -18,28 +18,24 @@ const ResultPage = () => {
   };
 
   const fetchRoadmap = async () => {
-    const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-
-    console.log("Using OpenAI API Key:", OPENAI_API_KEY); // Debug log
-
     try {
       const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
+        "https://api.groq.com/openai/v1/chat/completions",
         {
-          model: "gpt-3.5-turbo",
+          model: "llama3-8b-8192", // You can also try: "mixtral-8x7b-32768"
           messages: [{ role: "user", content: generatePrompt() }],
           temperature: 0.7,
         },
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${OPENAI_API_KEY}`,
+            Authorization: `Bearer ${import.meta.env.VITE_GROQ_API_KEY}`,
           },
         }
       );
       setRoadmap(response.data.choices[0].message.content);
     } catch (error) {
-      console.error("OpenAI API Error:", error?.response || error?.message || error);
+      console.error("Groq API Error:", error?.response || error);
       setRoadmap("Error generating roadmap. Please try again.");
     } finally {
       setLoading(false);
