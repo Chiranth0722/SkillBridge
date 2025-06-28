@@ -26,8 +26,26 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  justify-content: center;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  background: linear-gradient(-45deg, #ffecd2, #fcb69f, #d1c4e9, #b2ebf2);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 h1 {
@@ -43,11 +61,13 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s ease;
 }
 button:hover {
   border-color: #646cff;
+  background-color: #333;
 }
 button:focus,
 button:focus-visible {
@@ -64,5 +84,30 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+    color: #000;
   }
+  .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.content-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #222;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .content-box {
+    background-color: rgba(30, 30, 30, 0.95);
+    color: #f2f2f2;
+  }
+}
 }

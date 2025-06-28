@@ -22,7 +22,7 @@ const ResultPage = () => {
       const response = await axios.post(
         "https://api.groq.com/openai/v1/chat/completions",
         {
-          model: "llama3-8b-8192", // You can also try: "mixtral-8x7b-32768"
+          model: "llama3-8b-8192",
           messages: [{ role: "user", content: generatePrompt() }],
           temperature: 0.7,
         },
@@ -47,11 +47,13 @@ const ResultPage = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+  <div className="container">
+    <div className="content-box">
       <h2>Your Personalized Python Roadmap</h2>
       {loading ? <p>Generating...</p> : <pre>{roadmap}</pre>}
     </div>
-  );
+  </div>
+);
 };
 
 export default ResultPage;

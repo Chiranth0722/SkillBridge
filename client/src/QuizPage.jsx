@@ -33,18 +33,20 @@ const QuizPage = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+  <div className="container">
+    <div className="content-box">
       <h2>Python Skill Quiz</h2>
       {questions.map((q) => (
         <div key={q.id}>
           <p>{q.question}</p>
           {q.options.map((opt) => (
-            <label key={opt}>
+            <label key={opt} style={{ display: "block", marginBottom: "4px" }}>
               <input
                 type="radio"
                 name={`q${q.id}`}
                 value={opt}
                 onChange={() => handleChange(q.id, opt)}
+                style={{ marginRight: "8px" }}
               />
               {opt}
             </label>
@@ -54,7 +56,8 @@ const QuizPage = () => {
       ))}
       <button onClick={handleSubmit}>Submit Quiz</button>
     </div>
-  );
+  </div>
+);
 };
 
 export default QuizPage;
